@@ -97,7 +97,7 @@ async def main() -> int:
     try:
         records = await disc_mar()
 
-        output_path = DATA_DIR / "f_series.jsonl"
+        output_path = DATA_DIR / "filtered_series.jsonl"
 
         write_jsonl_atomic(
             output_path,
