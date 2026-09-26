@@ -1,2 +1,1 @@
-mkdir data/hyper -p 
-mkdir data/polymarket
+mkdir -p data/{hyper,polymarket}
