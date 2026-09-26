@@ -25,7 +25,6 @@ def write_json_atomic(path:Path,data:Any)->None:
             f,
             ensure_ascii=False,
             indent=2,
-            default=str,
         )
         f.write("\n")
         '''save to json'''

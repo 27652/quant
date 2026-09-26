@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import asyncio
-import dataclasses
 import json
 import sys
 from datetime import datetime, timezone
@@ -53,7 +52,6 @@ def write_jsonl_atomic(
                 record,
                 f,
                 ensure_ascii=False,
-                default=str,
             )
             f.write("\n")
 
@@ -69,8 +67,10 @@ def is_relevant(title: str, slug: str) -> bool:
 async def disc_mar()->list[dict[str,Any]]:
     records: list[dict[str,Any]]=[]
     async with AsyncPublicClient() as client:
+        raw_path = DATA_DIR / "series.txt"
+        raw_path.parent.mkdir(parents=True, exist_ok=True)
 
-        with open("./data/polymarket/series.txt","w",encoding="utf-8") as f:
+        with open(raw_path,"w",encoding="utf-8") as f:
             async for series in client.list_series(
                 closed=False,
                 page_size=50,
