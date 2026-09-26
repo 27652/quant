@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import traceback
 from hyperliquid.info import Info
 from hyperliquid.utils import constants
 
@@ -81,6 +82,7 @@ def main()-> int:
             f"{type(exc).__name__}:{exc}",
             file=sys.stderr,
         ) 
+        traceback.print_exc()
         return 1
 
 if __name__=="__main__":
