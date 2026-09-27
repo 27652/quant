@@ -39,6 +39,7 @@ def main() -> int:
         while True:
             started = time.monotonic()
 
+        try:
             snapshot = fetch_snapshot(info)
 
             date = snapshot["fetched_at"][:10]
@@ -54,11 +55,16 @@ def main() -> int:
                 f'{len(snapshot["contexts"])} assets'
             )
 
-            elapsed = time.monotonic() - started
-            time.sleep(
-                max(0, INTERVAL_SECONDS - elapsed)
+        except Exception as exc:
+            print(
+                f"collect failed: "
+                f"{type(exc).__name__}: {exc}"
             )
 
+        elapsed = time.monotonic() - started
+        time.sleep(
+            max(0, INTERVAL_SECONDS - elapsed)
+        )
     except KeyboardInterrupt:
         return 0
 

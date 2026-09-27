@@ -55,19 +55,19 @@ def main()-> int:
         snapshot of meta and contexts
         '''
         meta_snapshot = {
-            "schema_version": 1,
-            "source": "hyperliquid",
-            "endpoint": "meta_and_asset_ctxs",
-            "fetched_at": fetched_at,
-            "data": meta,
+            "schema_version": snapshot["schema_version"],
+            "source": snapshot["source"],
+            "endpoint": snapshot["endpoint"],
+            "fetched_at": snapshot["fetched_at"],
+            "data": snapshot["meta"],
         }
 
         contexts_snapshot = {
-            "schema_version": 1,
-            "source": "hyperliquid",
-            "endpoint": "meta_and_asset_ctxs",
-            "fetched_at": fetched_at,
-            "data": contexts,
+            "schema_version": snapshot["schema_version"],
+            "source": snapshot["source"],
+            "endpoint": snapshot["endpoint"],
+            "fetched_at": snapshot["fetched_at"],
+            "data": snapshot["contexts"],
         }
 
         write_json_atomic(
@@ -81,9 +81,11 @@ def main()-> int:
         )
 
         print(
-            f"[hyper] snapshot saved "
-            f"({len(contexts)} asset contexts)"
+            f'[hyper] discovered '
+            f'{len(snapshot["contexts"])} assets '
+            f'at {snapshot["fetched_at"]}'
         )
+
         return 0
 
     except Exception as exc:

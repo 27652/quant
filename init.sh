@@ -1,1 +1,1 @@
-mkdir -p data/{hyper,polymarket}
+$env:PYTHONPATH="src"
